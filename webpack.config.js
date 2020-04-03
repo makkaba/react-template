@@ -1,5 +1,8 @@
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+
 
 module.exports = {
   entry: './src/index.js',
@@ -19,7 +22,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.scss$/,
+        test: /\.(css|scss)$/,
         use: [
             "style-loader", // creates style nodes from JS strings
             "css-loader", // translates CSS into CommonJS
@@ -46,5 +49,8 @@ module.exports = {
   devServer: {
     contentBase: './dist',
     hot: true
+  },
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
   }
 };
